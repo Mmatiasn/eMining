@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -6,12 +7,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("eMining")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("eMining Website")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Palm Beach County")]
-[assembly: AssemblyProduct("eMining")]
-[assembly: AssemblyCopyright("Copyright © Palm Beach County 2017")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("eMining")]
+[assembly: AssemblyProduct("eMining Website")]
+[assembly: AssemblyCopyright("Copyright © eMining 2017")]
+[assembly: AssemblyTrademark("eMining ™")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -33,3 +34,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("en-US")]
+

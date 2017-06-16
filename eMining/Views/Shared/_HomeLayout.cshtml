@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" class="full-height">
+
+<head>
+    @Html.Partial("_Head")
+</head>
+
+<body class="intro-page creative-lp">
+    <!--Navigation & Intro-->
+    <header>
+        <!--Navbar-->
+        @Html.Partial("_Nav")
+        <!--/.Navbar-->
+        <!--Video-->
+        <div class="intro-video view">
+            <video poster="https://mdbootstrap.com/img/Photos/Horizontal/Things/full%20page/img%20%287%29.jpg" playsinline="" autoplay="" muted="" loop="">
+                <source src="https://redirector.googlevideo.com/videoplayback?mv=m&mt=1497643424&ms=au&ei=CjpEWe7xMsW14gKNh76oAw&expire=1497665130&pl=38&mime=video%2Fmp4&requiressl=yes&mn=sn-a5m7znel&mm=31&sparams=dur%2Cei%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cexpire&ipbits=0&itag=22&source=youtube&id=o-AHxErDhHBotzyRM9DIjrEtDS-zGclPJyaoQB5eFOucY-&initcwndbps=1752500&key=yt6&ip=2001%3A19f0%3A7001%3Ad32%3A5400%3Aff%3Afe58%3A19e7&ratebypass=yes&lmt=1470954927089382&signature=08A8B5BE570A269A6E817D8F044FE7576A3BE0FB.9E49A5649A564701913219A5081DE28BA71DF827&dur=88.491" type="video/mp4">
+            </video>
+            <div class="hm-gradient">
+                <div class="full-bg-img flex-center">
+                    <div class="container smooth-scroll">
+                        <div class="row">
+                            <div class="col-md-12 white-text text-center smooth-scroll">
+                                <div class="wow fadeInDown" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">
+                                    <h3 class="brand-name font-bold white-text mb-2">eMining</h3>
+                                    <hr class="hr-light">
+                                    <h4 class="subtext-header mt-2 mb-2">Ethereum is the currency of the future. Start mining today!</h4>
+                                </div>
+                                <a href="#about" data-offset="90" class="btn bg-primary wow fadeInUp waves-effect waves-light" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;"><i class="fa fa-home"></i> Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/Video-->
+    </header>
+    <!--/Navigation & Intro-->
+    <!--Main content-->
+    <main>
+        @RenderBody()
+    </main>
+    <!--/Main content-->
+    <!--Footer-->
+    @Html.Partial("_Footer")
+    <!--/.Footer-->
+    @RenderSection("FooterRender", false)
+</body>
+
+</html>

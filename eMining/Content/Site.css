@@ -1,24 +1,150 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+﻿/*  
+    DOCUMENT INFORMATION
+	    - Document: eMining Css
+	    - Version:  1.0.0
+	    - Client:   eMining
+	    - Author:   Matias Miranda Noriega
+   
+    COLORS
+	    - default body text  #ffffcc
+	    - subtitle h2 text   #ff9900
+	    - form input borders #cc9933
+	    - default p text     #f0f0f0
+	    - pre borders        #ffff99
 */
-.dl-horizontal dt {
-    white-space: normal;
+
+/* MIN-WIDTH*/
+@media {
+    /*
+        - Extra small devices (portrait phones, less than 576px)
+        - No media query since this is the default in Bootstrap
+    */
+    .creative-lp video {
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        background: url(https://mdbootstrap.com/img/Photos/Horizontal/Things/full%20page/img%20%287%29.jpg) no-repeat;
+        -ms-background-size: cover;
+        background-size: cover;
+        -ms-background-position: center center;
+        background-position: center center;
+        -ms-transition: 1s opacity;
+        -o-transition: 1s opacity;
+        -webkit-transition: 1s opacity;
+        transition: 1s opacity;
+    }
+
+    .full-height,
+    .full-height body,
+    .full-height header,
+    .full-height header .view {
+        height: 100%;
+    }
+
+    .brand-name {
+        font-size: 4.5rem;
+    }
+
+    .subtext-header {
+        line-height: 1.5;
+    }
+
+    .wow {
+        visibility: hidden;
+    }
+
+    .font-bold {
+        font-weight: 500;
+    }
+
+    .creative-lp .hm-gradient .full-bg-img {
+        background: -moz-linear-gradient(45deg, rgba(2, 117, 216, 0.6), rgba(3, 3, 4, 0.6) 100%);
+        background: -webkit-linear-gradient(45deg, rgba(2, 117, 216, 0.6), rgba(3, 3, 4, 0.6) 100%);
+        background: linear-gradient(45deg, rgba(2, 117, 216, 0.6), rgba(3, 3, 4, 0.6) 100%);
+    }
+
+    .intro hr, .hr-streak hr, .intro-video hr {
+        margin: 1.5rem 0 1.5rem 0;
+    }
+
+        .intro hr.hr-light, .hr-streak hr.hr-light, .intro-video hr.hr-light {
+            margin-left: 31%;
+            margin-right: 31%;
+            background-color: #fff;
+            height: 1px;
+        }
+
+    .intro-page .navbar:not(.top-nav-collapse) {
+        background: transparent !important;
+        box-shadow: none;
+    }
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+@media (min-width: 576px) {
+    /*
+        - Small devices (landscape phones, 576px and up)
+    */
+}
+
+@media (min-width: 768px) {
+    /*
+        - Medium devices (tablets, 768px and up)
+    */
+}
+
+@media (min-width: 992px) {
+    /*
+        - Large devices (desktops, 992px and up)
+    */
+}
+
+@media (min-width: 1200px) {
+    /*
+        - Extra large devices (large desktops, 1200px and up)
+    */
+}
+
+
+
+/* MAX-WIDTH */
+@media (max-width: 575px) {
+    /*
+        - Extra small devices (portrait phones, less than 576px)
+    */
+    .brand-name {
+        font-size: 2.5rem;
+    }
+
+    .subtext-header {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    /*
+        - Small devices (landscape phones, less than 768px)
+    */
+    .intro hr.hr-light, .hr-streak hr.hr-light, .intro-video hr.hr-light {
+        margin-left: 21%;
+        margin-right: 21%;
+    }
+}
+
+@media (max-width: 991px) {
+    /*
+        - Medium devices (tablets, less than 992px)
+    */
+}
+
+@media (max-width: 1199px) {
+    /*
+        - Large devices (desktops, less than 1200px)
+    *
 }

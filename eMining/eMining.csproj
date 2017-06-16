@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -17,7 +17,7 @@
     <AssemblyName>eMining</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -29,11 +29,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,11 +46,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -102,19 +112,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease">
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -130,32 +133,239 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
+    <Compile Include="Controllers\CustomerServiceController.cs" />
+    <Compile Include="Controllers\DataCentersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PressController.cs" />
+    <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Icons\eM_Icons\1_Desktop_Icons\icon_016.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\1_Desktop_Icons\icon_032.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\1_Desktop_Icons\icon_048.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\1_Desktop_Icons\icon_128.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\1_Desktop_Icons\icon_256.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\1_Desktop_Icons\icon_512.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\2_Android_Icons\icon_036.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\2_Android_Icons\icon_048.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\2_Android_Icons\icon_072.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\3_iPhone_Icons\icon_029.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\3_iPhone_Icons\icon_048.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\3_iPhone_Icons\icon_057.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\3_iPhone_Icons\icon_072.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\3_iPhone_Icons\icon_512.png" />
+    <Content Include="Content\Images\Icons\eM_Icons\4_Ico_Icons\icon_512.ico" />
+    <Content Include="Content\MDB Pro\css\bootstrap.css" />
+    <Content Include="Content\MDB Pro\css\bootstrap.min.css" />
+    <Content Include="Content\MDB Pro\css\mdb.css" />
+    <Content Include="Content\MDB Pro\css\mdb.min.css" />
+    <Content Include="Content\MDB Pro\css\style.css" />
+    <Content Include="Content\MDB Pro\font\fa\fontawesome-webfont.svg" />
+    <Content Include="Content\MDB Pro\img\lightbox\default-skin.png" />
+    <Content Include="Content\MDB Pro\img\lightbox\default-skin.svg" />
+    <Content Include="Content\MDB Pro\img\lightbox\preloader.gif" />
+    <Content Include="Content\MDB Pro\img\overlays\01.png" />
+    <Content Include="Content\MDB Pro\img\overlays\02.png" />
+    <Content Include="Content\MDB Pro\img\overlays\03.png" />
+    <Content Include="Content\MDB Pro\img\overlays\04.png" />
+    <Content Include="Content\MDB Pro\img\overlays\05.png" />
+    <Content Include="Content\MDB Pro\img\overlays\06.png" />
+    <Content Include="Content\MDB Pro\img\overlays\07.png" />
+    <Content Include="Content\MDB Pro\img\overlays\08.png" />
+    <Content Include="Content\MDB Pro\img\overlays\09.png" />
+    <Content Include="Content\MDB Pro\img\svg\arrow_left.svg" />
+    <Content Include="Content\MDB Pro\img\svg\arrow_right.svg" />
+    <Content Include="Content\MDB Pro\index.html" />
+    <Content Include="Content\MDB Pro\js\bootstrap.js" />
+    <Content Include="Content\MDB Pro\js\bootstrap.min.js" />
+    <Content Include="Content\MDB Pro\js\jquery-2.2.3.js" />
+    <Content Include="Content\MDB Pro\js\jquery-2.2.3.min.js" />
+    <Content Include="Content\MDB Pro\js\jquery-3.1.1.js" />
+    <Content Include="Content\MDB Pro\js\jquery-3.1.1.min.js" />
+    <Content Include="Content\MDB Pro\js\mdb.js" />
+    <Content Include="Content\MDB Pro\js\mdb.min.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\animations.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\autocomplete.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\buttons.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\card-reveal.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\character-counter.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\chart.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\chips.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\collapsible.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\dropdown.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\enhanced-modals.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\forms-basic.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\forms.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\global.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\hammer.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\jquery-easing.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\jquery.easypiechart.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\jquery.hammer.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\jquery.jsticky.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\lightbox.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\mdb.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\panel-popuot.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\picker-date.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\picker-time.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\picker.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\preloading.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\rotating-cards.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\scrollbar.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\scrolling-nav.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\sideNav.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\smooth-scroll.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\toasts.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\velocity.min.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\video-bg.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\waves.js" />
+    <Content Include="Content\MDB Pro\js\modules %28optional%29\wow.js" />
+    <Content Include="Content\MDB Pro\js\tether.js" />
+    <Content Include="Content\MDB Pro\js\tether.min.js" />
+    <Content Include="Content\MDB Pro\js\_README %28about modules%29.txt" />
+    <Content Include="Content\MDB Pro\mdb-addons\mdb-lightbox-ui.html" />
+    <Content Include="Content\MDB Pro\mdb-addons\preloader.html" />
+    <Content Include="Content\MDB Pro\README.txt" />
+    <Content Include="Content\MDB Pro\sass\README.txt" />
+    <Content Include="Content\MDB Pro\templates\advanced\Admin\home-page.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Admin\landing-page.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Blog\home-page.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Blog\post.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\E-commerce\home-page.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\E-commerce\product-page.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Landing Pages\app.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Landing Pages\cta-buttons.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Landing Pages\form-contact.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Landing Pages\form-minimalist.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Landing Pages\register-classic.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Landing Pages\register-social.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Landing Pages\video.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Magazine\home-page.html" />
+    <Content Include="Content\MDB Pro\templates\advanced\Portfolio %28not ready!%29\home-page.html" />
+    <Content Include="Content\MDB Pro\templates\starters\1-column listing.html" />
+    <Content Include="Content\MDB Pro\templates\starters\2-columns listing.html" />
+    <Content Include="Content\MDB Pro\templates\starters\3-columns listing.html" />
+    <Content Include="Content\MDB Pro\templates\starters\basic-landing-page.html" />
+    <Content Include="Content\MDB Pro\templates\starters\blog-home-page.html" />
+    <Content Include="Content\MDB Pro\templates\starters\corporate-style.html" />
+    <Content Include="Content\MDB Pro\templates\starters\e-commerce-home-page.html" />
+    <Content Include="Content\MDB Pro\templates\starters\full-background-image.html" />
+    <Content Include="Content\MDB Pro\templates\starters\full-image-carousel.html" />
+    <Content Include="Content\MDB Pro\templates\starters\full-video-carousel.html" />
+    <Content Include="Content\MDB Pro\templates\starters\half-image-carousel.html" />
+    <Content Include="Content\MDB Pro\templates\starters\jumbotron.html" />
+    <Content Include="Content\MDB Pro\templates\starters\product-page.html" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Images\Icons\eM_Icons\eM_Icons.zip" />
+    <Content Include="eMiningKeyFile.pfx" />
+    <Content Include="Content\MDB Pro\font\fa\fontawesome-webfont.eot" />
+    <Content Include="Content\MDB Pro\font\fa\fontawesome-webfont.ttf" />
+    <Content Include="Content\MDB Pro\font\fa\fontawesome-webfont.woff" />
+    <Content Include="Content\MDB Pro\font\fa\fontawesome-webfont.woff2" />
+    <Content Include="Content\MDB Pro\font\fa\FontAwesome.otf" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Bold.eot" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Bold.ttf" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Bold.woff" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Bold.woff2" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Light.eot" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Light.ttf" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Light.woff" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Light.woff2" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Medium.eot" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Medium.ttf" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Medium.woff" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Medium.woff2" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Regular.eot" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Regular.ttf" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Regular.woff" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Regular.woff2" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Thin.eot" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Thin.ttf" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Thin.woff" />
+    <Content Include="Content\MDB Pro\font\roboto\Roboto-Thin.woff2" />
+    <Content Include="Content\MDB Pro\License.pdf" />
+    <Content Include="Content\MDB Pro\MDB-Pro.zip" />
+    <Content Include="Content\MDB Pro\sass\mdb.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\data\_colors.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\data\_mixins.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\data\_prefixer.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\data\_variables-b4.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\data\_variables.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_animations.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_buttons.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_cards-basic.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_carousels-basic.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_footer.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_forms-basic.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_global.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_helpers.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_hover-effects.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_modals.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_navbars.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_roboto.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_typography.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\free\_waves.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\date_picker\_default.date.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\date_picker\_default.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\date_picker\_default.time.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_blog.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_features.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_form-sets.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_magazine.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_pricing.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_social.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_team.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_templates.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\sections\_testimonials.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_accordion.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_animations-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_buttons-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_cards-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_carousels-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_charts-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_chips.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_dropdowns-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_ecommerce.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_forms-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_light-box.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_modals-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_msc.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_navbars-pro.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_parallax.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_progress.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_scrollbar.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_scrollspy.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_side-nav.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_skins.old.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_skins.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_social-buttons.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_stepper.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_tabs.scss" />
+    <Content Include="Content\MDB Pro\sass\mdb\pro\_toasts.scss" />
     <None Include="Properties\PublishProfiles\eMining-Web-Application - Web Deploy.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\eMining.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -169,25 +379,37 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Nav.cshtml" />
+    <Content Include="Views\Shared\_Head.cshtml" />
+    <Content Include="Views\AboutUs\AboutUs.cshtml" />
+    <Content Include="Views\Press\Press.cshtml" />
+    <Content Include="Views\CustomerService\CustomerService.cshtml" />
+    <Content Include="Views\Pricing\Pricing.cshtml" />
+    <Content Include="Views\DataCenters\DataCenters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Content\Images\Icons\eM_Icons\4_Ico_Icons\icon_512.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>eMiningKeyFile.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -203,7 +425,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>31400</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:31400/</IISUrl>
+          <IISUrl>http://localhost/eMining</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -217,8 +439,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

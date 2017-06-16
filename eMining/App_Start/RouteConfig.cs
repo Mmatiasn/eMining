@@ -14,9 +14,15 @@ namespace eMining
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
+                name: "AboutUs",
+                url: "AboutUs/{action}/{id}",
+                defaults: new { controller = "AboutUs", action = "AboutUs", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Home",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Home", id = UrlParameter.Optional }
             );
         }
     }
